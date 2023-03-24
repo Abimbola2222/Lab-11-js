@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 8px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button>Add item</button>
+    </div>
+
+    <ul>
+      <!-- An empty unordered list to hold the shopping list items -->
+    </ul>
+
+    <script>
+      // Get references to the list, input, and button elements
+      const shoppingList = document.querySelector('ul');
+      const input = document.querySelector('input');
+      const button = document.querySelector('button');
+
+      // Create a function to run when the button is clicked
+      function addItem() {
+        // Get the value of the input element and store it in a variable
+        const itemText = input.value;
+
+        // Empty the input element by setting its value to an empty string
+        input.value = '';
+
+        // Create new list item, span, and button elements
+        const listItem = document.createElement('li');
+        const span = document.createElement('span');
+        const deleteButton = document.createElement('button');
+
+        // Append the span and delete button to the list item
+        listItem.appendChild(span);
+        listItem.appendChild(deleteButton);
+
+        // Set the text content of the span to the input element value
+        span.textContent = itemText;
+
+        // Set the text content of the delete button to 'Delete'
+        deleteButton.textContent = 'Delete';
+
+        // Attach an event listener to the delete button to remove the list item when clicked
+        deleteButton.addEventListener('click', function() {
+          shoppingList.removeChild(listItem);
+        });
+
+        // Append the list item to the list
+        shoppingList.appendChild(listItem);
+
+        // Set the focus back to the input element
+        input.focus();
+      }
+
+      // Attach an event listener to the button to call the addItem function when clicked
+      button.addEventListener('click', addItem);
+    </script>
+  </body>
+</html>
